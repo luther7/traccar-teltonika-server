@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+state="${1:-start}"
+echo "--- Setting traccar host EC2 instance state to '${state}'"
+aws ec2 "${state}-instances" --instance-ids "$( \
+    aws ec2 describe-instances \
+      --filters "Name=tag:Name,Values=traccar" \
+      --query "Reservations[].Instances[].InstanceId" \
+      --output text \
+  )"
