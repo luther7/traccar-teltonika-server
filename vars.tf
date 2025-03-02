@@ -13,7 +13,7 @@ variable "aws_ami" {
 
 variable "aws_instance_type" {
   type    = string
-  default = "t4g.nano"
+  default = "t4g.micro"
 }
 
 variable "aws_availability_zone" {
