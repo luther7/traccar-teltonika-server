@@ -8,6 +8,7 @@ apt-get --quiet --yes remove snapd
 apt-mark hold snapd
 apt-get --quiet --yes --no-install-recommends update
 apt-get --quiet --yes --no-install-recommends upgrade
+systemctl disable --now multipathd
 
 echo "--> Install, configure and start tailscale"
 curl \
@@ -29,9 +30,6 @@ tailscale \
   --hostname="${tailscale_hostname}" \
   --ssh=true
 tailscale serve --bg 8082
-
-echo "--> Disable multipathd"
-systemctl disable --now multipathd
 
 echo "--> Mount storage volume"
 # shellcheck disable=SC2154
