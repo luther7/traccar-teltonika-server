@@ -41,10 +41,7 @@ resource "aws_ebs_volume" "traccar_storage" {
   size              = var.aws_storage_volume_size
   encrypted         = true
   tags              = var.aws_tags
-
-  lifecycle {
-    prevent_destroy = true
-  }
+  final_snapshot    = true
 }
 
 resource "tailscale_tailnet_key" "traccar_server_key" {
